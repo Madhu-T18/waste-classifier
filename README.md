@@ -1,104 +1,145 @@
-♻️ WasteWise — AI Waste Classification System
-An AI-powered waste classification system that detects whether waste is Recyclable, Organic, or Hazardous from an image — built with MobileNetV2 Transfer Learning and served via a FastAPI backend with a full dashboard frontend.
+# ♻️ WasteWise — AI Waste Classification System
 
-🌍 Why This Project?
-Improper waste disposal is one of the leading causes of environmental pollution. Most people don't know which bin to use for different types of waste. WasteWise solves this by letting anyone upload a photo of waste and instantly get:
-✅ The waste category (Recyclable / Organic / Hazardous)
-✅ Confidence score of the prediction
-✅ Disposal tip — exactly where and how to dispose it
-✅ History dashboard to track past classifications
+![Python](https://img.shields.io/badge/Python-3.11-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
+![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-🖥️ Demo Screenshots
-<img width="1888" height="923" alt="Screenshot (727)" src="https://github.com/user-attachments/assets/404149a6-7983-41b5-90f0-84d245ce2833" />
-<img width="1847" height="879" alt="Screenshot (728)" src="https://github.com/user-attachments/assets/7e601d5b-ad59-494d-84bd-fa56989f3b0e" />
+> AI-powered waste classification system — upload a waste image and instantly know if it is **Recyclable**, **Organic**, or **Hazardous**!
 
-🛠️ Tech Stack
-LayerTechnologyML ModelTensorFlow, MobileNetV2 (Transfer Learning)Backend APIFastAPI, UvicornFrontendHTML, CSS, JavaScriptImage ProcessingPillow, NumPyModel SavingKeras (.h5)DeploymentRender.com
+---
 
-📁 Project Structure
+## 🌍 Why This Project?
+
+Improper waste disposal causes major environmental pollution. WasteWise solves this by letting anyone upload a photo of waste and instantly get the category + disposal tip.
+
+---
+
+## ✨ Features
+
+- ♻️ Classifies waste as **Recyclable / Organic / Hazardous**
+- 📊 Confidence score for each prediction
+- 💡 Disposal tip for each category
+- 📂 History dashboard to track past classifications
+- ⚡ FastAPI backend — fast and lightweight
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|---|---|
+| ML Model | TensorFlow, MobileNetV2 (Transfer Learning) |
+| Backend API | FastAPI, Uvicorn |
+| Frontend | HTML, CSS, JavaScript |
+| Deployment | Render.com |
+
+---
+
+## 📁 Project Structure
+```
 waste-classifier/
 ├── model/
-│   ├── preprocess.py        # Image loading & feature extraction
-│   ├── train.py             # Model training script (MobileNetV2)
-│   ├── model_cnn.h5         # Trained model file
-│   └── class_indices.pkl    # Class label mapping
+│   ├── preprocess.py
+│   ├── train.py
+│   ├── model_cnn.h5
+│   └── class_indices.pkl
 ├── api/
-│   ├── main.py              # FastAPI app with endpoints
-│   └── predict.py           # Prediction logic
+│   ├── main.py
+│   └── predict.py
 ├── frontend/
-│   └── index.html           # Full dashboard UI
-├── run.bat                  # One-click run (Windows)
-├── requirements.txt         # Python dependencies
+│   └── index.html
+├── run.bat
+├── requirements.txt
 └── README.md
+```
 
-🚀 Getting Started
-Prerequisites
+---
 
-Python 3.10+
-pip
+## 🚀 Getting Started
 
-1. Clone the repository
-bashgit clone https://github.com/Madhu-T18/waste-classifier.git
+### 1. Clone the repository
+```bash
+git clone https://github.com/Madhu-T18/waste-classifier.git
 cd waste-classifier
-2. Install dependencies
-bashpip install -r requirements.txt
-3. Train the model (optional — pretrained model included)
-bashcd model
-python train.py
-4. Start the API
-bashcd api
-uvicorn main:app --reload
-5. Open the frontend
-Open frontend/index.html in your browser
-Or on Windows — just double click run.bat! 🎉
+```
 
-🌐 API Endpoints
-MethodEndpointDescriptionGET/Health checkPOST/predictUpload image → get waste categoryGET/categoriesList all waste categories & tips
-Sample Request
-bashcurl -X POST "http://127.0.0.1:8000/predict" \
-  -H "accept: application/json" \
-  -F "file=@waste_image.jpg"
-Sample Response
-json{
+### 2. Install dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Start the API
+```bash
+cd api
+uvicorn main:app --reload
+```
+
+### 4. Open frontend
+Open `frontend/index.html` in browser
+
+> Windows users — just double click `run.bat`! 🎉
+
+---
+
+## 🌐 API Endpoints
+
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/` | Health check |
+| POST | `/predict` | Upload image → get category |
+| GET | `/categories` | List all categories |
+
+### Sample Response
+```json
+{
   "category": "Recyclable",
   "confidence": 92.4,
-  "disposal_tip": "Clean the item and place it in the blue recycling bin.",
+  "disposal_tip": "Clean and place in blue recycling bin.",
   "raw_class": "plastic"
 }
+```
 
-🧠 Model Details
-DetailInfoBase ModelMobileNetV2 (pretrained on ImageNet)ApproachTransfer Learning + Fine TuningInput Size224 x 224 pxOutput ClassesRecyclable, Organic, HazardousTraining DatasetCustom waste dataset (1638 images)Accuracy~66% (improving with more data)OptimizerAdamLoss FunctionCategorical Crossentropy
+---
 
-📊 Waste Categories
-CategoryExamplesBin♻️ RecyclablePlastic, Paper, Glass, Metal🔵 Blue bin🌿 OrganicFood scraps, Leaves, Peels🟢 Green bin⚠️ HazardousBatteries, Chemicals, E-waste🔴 Hazardous facility
+## 📊 Waste Categories
 
-🔧 requirements.txt
-fastapi
-uvicorn
-tensorflow
-pillow
-numpy
-joblib
-scikit-learn
-scikit-image
-python-multipart
+| Category | Examples | Bin |
+|---|---|---|
+| ♻️ Recyclable | Plastic, Paper, Glass, Metal | 🔵 Blue bin |
+| 🌿 Organic | Food scraps, Leaves, Peels | 🟢 Green bin |
+| ⚠️ Hazardous | Batteries, Chemicals, E-waste | 🔴 Hazardous facility |
 
-🚀 Deployment (Render.com)
-This API is deployed on Render.com (free tier).
-Live API: Add your Render URL here after deployment
+---
 
-🙋‍♀️ Author
-Madhu T
+## 🧠 Model Details
 
-🎓 AI/ML Student — Sri Shakthi Institute of Engineering and Technology, Coimbatore
-💼 LinkedIn
-🐙 GitHub
+| Detail | Info |
+|---|---|
+| Base Model | MobileNetV2 (ImageNet pretrained) |
+| Approach | Transfer Learning |
+| Input Size | 224 x 224 px |
+| Classes | Recyclable, Organic, Hazardous |
+| Accuracy | ~66% |
+| Optimizer | Adam |
 
+---
 
-📄 License
-This project is licensed under the MIT License.
+## 🙋‍♀️ Author
 
-🌟 Show Your Support
-If you found this project useful, please ⭐ star this repository — it helps a lot!
+**Madhu T**
+- 🎓 AI/ML Student — Sri Shakthi Institute of Engineering and Technology
+- 💼 [LinkedIn](https://www.linkedin.com/in/madhu-t-b6b106331)
+- 🐙 [GitHub](https://github.com/Madhu-T18)
 
-Built with 💚 for a cleaner environment
+---
+
+## 📄 License
+
+MIT License
+
+---
+
+⭐ If you found this useful, please star this repo!
+
+> Built with 💚 for a cleaner environment
